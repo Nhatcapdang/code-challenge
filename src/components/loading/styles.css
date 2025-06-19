@@ -1,0 +1,33 @@
+.classic-2 {
+  background: linear-gradient(
+      135deg,
+      #0000 calc(50% - 0.5em),
+      #000 0 calc(50% + 0.5em),
+      #0000 0
+    )
+    right/300% 100%;
+  animation: c2 2s infinite;
+}
+
+.classic-2::before {
+  content: '';
+  color: #0000;
+  /* background: linear-gradient(to right, #ff9fba, #c8b5ff); */
+
+  background: linear-gradient(
+    135deg,
+    #ff9fba calc(50% - 0.5em),
+    #fff 0 calc(50% + 0.5em),
+    #c8b5ff 0
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: inherit;
+  background-position: inherit;
+}
+
+@keyframes c2 {
+  100% {
+    background-position: left;
+  }
+}

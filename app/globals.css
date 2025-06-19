@@ -1,0 +1,206 @@
+@import 'tailwindcss';
+/* https://tailwindcss.com/docs/theme */
+
+/* 
+:root {
+  --background: white;
+  --foreground: black;
+}
+
+[data-theme='dark'] {
+  --background: black;
+  --foreground: white;
+} 
+*/
+/* dark:bg-bue */
+@custom-variant dark (&:where(.dark, .dark *));
+
+* {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  :root {
+    --background: white;
+  }
+  .dark {
+    --background: black;
+  }
+}
+
+/* Use :root for custom properties */
+@theme {
+  /* --background: 0 0% 3.9%; */
+  /* --foreground: 0 0% 98%; */
+  /* --card: 0 0% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 20.5 90.2% 48.2%;
+  --primary-foreground: 60 9.1% 97.8%;
+  --secondary: 12 6.5% 15.1%;
+  --secondary-foreground: 60 9.1% 97.8%;
+  --muted: 12 6.5% 15.1%;
+  --muted-foreground: 24 5.4% 63.9%;
+  --accent: 12 6.5% 15.1%;
+  --accent-foreground: 60 9.1% 97.8%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --border: 12 6.5% 15.1%;
+  --input: 12 6.5% 15.1%;
+  --ring: 20.5 90.2% 48.2%; */
+  --color-red-50: #ffe9e9;
+  --color-red-100: #ffd1d2;
+  --color-red-300: #f9a2a2;
+  --color-red-400: #f47070;
+  --color-red-500: #ef4545;
+  --color-red-600: #ed2a2a;
+  --color-red-700: #ec1a1c;
+  --color-red-800: #d20b10;
+  --color-red-900: #bc020c;
+  --color-red-950: #a50007;
+
+  --color-yellow-50: #fef3ce;
+  --color-yellow-100: #fce59f;
+  --color-yellow-300: #fad76b;
+  --color-yellow-400: #f8cb40;
+  --color-yellow-500: #f7c326;
+  --color-yellow-600: #f7bf16;
+  --color-yellow-700: #dba808;
+  --color-yellow-800: #c39500;
+  --color-yellow-900: #a98000;
+
+  --color-green-50: #e7feef;
+  --color-green-100: #d4f9e2;
+  --color-green-200: #aaf0c4;
+  --color-green-300: #7de8a4;
+  --color-green-400: #57e189;
+  --color-green-500: #40dd78;
+  --color-green-600: #31db6e;
+  --color-green-700: #21c25c;
+  --color-green-800: #15ac50;
+  --color-green-900: #009542;
+
+  --color-blue-50: #e4f5ff;
+  --color-blue-100: #cee5ff;
+  --color-blue-200: #9dc9fd;
+  --color-blue-300: #69aafa;
+  --color-blue-400: #3f90f8;
+  --color-blue-500: #2480f7;
+  --color-blue-600: #1178f8;
+  --color-blue-700: #0066dd;
+  --color-blue-800: #005bc7;
+  --color-blue-900: #004eb0;
+
+  --breakpoint-xs: 430px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+  --breakpoint-laptop: 1440px;
+  --breakpoint-desktop: 1920px;
+
+  --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
+  /* --animate-marquee-horizontal: marquee-x var(--duration) infinite linear; */
+  --animate-marquee-horizontal: marquee-x 20s infinite linear;
+  /* --animate-marquee-vertical: marquee-y var(--duration) linear infinite; */
+  --animate-marquee-vertical: marquee-y 20s linear infinite;
+
+  @keyframes fade-in-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes marquee-x {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes marquee-y {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes rotate-full {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@utility skeleton {
+  & {
+    position: relative;
+  }
+  &::before {
+    content: '';
+    background-color: var(--color-gray-300);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    @apply animate-pulse;
+  }
+}
+
+@utility container-2 {
+  & {
+    max-width: var(--breakpoint-laptop);
+    margin: 0 auto;
+    padding: 0 calc(var(--spacing) * 4);
+  }
+}
+/* @layer utilities {
+  .skeleton {
+     position: relative;
+  }
+  .skeleton::before {
+       content: '';
+    background-color: var(--color-gray-300);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    @apply animate-pulse
+  }
+} */
+@layer components {
+  /* * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  } */
+
+  .typography {
+    p {
+      font-size: var(--text-base);
+      color: var(--color-red-700);
+    }
+    h1 {
+      font-size: var(--text-2xl--line-height);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-red-950);
+    }
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-gray-950);
+    }
+  }
+}

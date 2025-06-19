@@ -1,0 +1,92 @@
+type ResponseBinance<T> = {
+  code: string;
+  message?: string;
+  messageDetail?: string;
+  success: boolean;
+  data: T;
+};
+
+/** {
+    "sb": "Ethena",
+    "alias": "ENA",
+    "url": "https://bin.bnbstatic.com/image/admin_mgs_image_upload/20240329/2ec2f51d-813a-43da-8b1a-0d27b8ad744b.png",
+    "mc": 1529420863.28125,
+    "rk": 54,
+    "cs": 5553125000,
+    "v": "109898038.13245470",
+    "vpm": "0.07185598",
+    "ms": null,
+    "ts": 15000000000,
+    "id": 1712016000000,
+    "ipu": null,
+    "eu": "https://etherscan.io/token/0x57e114B691Db790C35207b2e685D4A43181e6061,https://app.nansen.ai/token-god-mode?chain=ethereum&tab=transactions&tokenAddress=0x57e114B691Db790C35207b2e685D4A43181e6061,https://www.okx.com/web3/explorer/eth/token/0x57e114B691Db790C35207b2e685D4A43181e6061",
+    "ws": "https://www.ethena.fi/",
+    "dmc": 0.0561,
+    "athpu": 1.5169718881109548,
+    "athd": 1712841300000,
+    "athfc": true,
+    "atlpu": 0.19527090297328784,
+    "ald": 1725656700000,
+    "atlfc": true,
+    "fdmc": 4131243750,
+    "wpu": "https://ethena-labs.gitbook.io/ethena-labs/",
+    "dbk": "symbol_desc_ENA",
+    "is": false,
+    "ci": null,
+    "cwu": null,
+    "rhn": "ethena-labs",
+    "rn": "ethena-minting-client",
+    "rd": null,
+    "rut": 1744058628000,
+    "ru": "https://github.com/ethena-labs",
+    "xlut": 1744738638000,
+    "xhn": "ethena_labs",
+    "xu": "https://x.com/ethena_labs",
+    "xlm": "RT @euler_mab: New chain, familiar strategies. looking pretty spicy out of the blocks onla…",
+    "fu": "https://x.com/ethena_labs/status/1912198562395414611",
+    "pw": null,
+    "fri": "21404488572474",
+    "fru": "https://www.binance.com/en/square/post/21404488572474"
+}*/
+type TTokenInfo = {
+  sb: string;
+  alias: string;
+  url: string;
+  mc: number;
+  rk: number;
+  cs: number;
+  v: string;
+  vpm: string;
+  ms: unknown;
+  ts: number;
+  id: number;
+  ipu: unknown;
+  eu: string;
+  ws: string;
+  dmc: number;
+  athpu: number;
+  athd: number;
+  athfc: true;
+  atlpu: number;
+  ald: number;
+  atlfc: true;
+  fdmc: number;
+  wpu: string;
+  dbk: string;
+  is: false;
+  ci: unknown;
+  cwu: unknown;
+  rhn: string;
+  rn: string;
+  rd: unknown;
+  rut: number;
+  ru: string;
+  xlut: number;
+  xhn: string;
+  xu: string;
+  xlm: string;
+  fu: string;
+  pw: unknown;
+  fri: string;
+  fru: string;
+};
