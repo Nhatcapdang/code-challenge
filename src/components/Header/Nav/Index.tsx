@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useRef } from 'react';
-import { motion, useCycle } from 'framer-motion';
+import { motion, useCycle, Variants } from 'framer-motion';
 
 import './styles.css';
 
@@ -8,7 +8,7 @@ import { useDimensions } from '@/src/utils';
 import { MenuToggle } from './MenuToggle';
 import { Navigation } from './Navigation';
 
-const sidebar = {
+const sidebar: Variants = {
   open: (height = 1000) => ({
     // clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
     transition: {
