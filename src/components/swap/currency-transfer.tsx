@@ -1,7 +1,7 @@
 'use client';
 
 import { EqualApproximately } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, Variants } from 'motion/react';
 import { formatNumber } from '@/src/utils/common';
 
 interface CheckmarkProps {
@@ -11,7 +11,7 @@ interface CheckmarkProps {
   className?: string;
 }
 
-const draw = {
+const draw: Variants = {
   hidden: { pathLength: 0, opacity: 0 },
   visible: (i: number) => ({
     pathLength: 1,

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
+import { motion, Variants } from 'motion/react';
 
-const variants = {
+const variants: Variants = {
   open: {
     y: 0,
     opacity: 1,
