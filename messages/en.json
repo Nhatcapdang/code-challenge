@@ -1,0 +1,139 @@
+{
+  "create_token": "Create Token",
+  "burn_token": "Burn Token",
+  "update_metadata": "Update Metadata",
+  "close_token_account": "Close Token Account",
+  "liquidity_pool": "Liquidity Pool",
+  "overview": "Overview",
+  "launch_your_meme_coin_in_seconds": "Launch your meme coin in seconds",
+  "create_token_description": "Create your meme coin in seconds",
+  "burn_token_description": "Burn your token easily",
+  "update_token_description": "Modify metadata easily",
+  "close_account_description": "Reclaim SOL from token accounts",
+  "liquidity_pool_description": "Trade instantly for your token",
+  "enterprise_grade_token_management_platform": "Enterprise-grade token management platform",
+  "modify_metadata_on_the_fly": "Modify metadata easily on the fly",
+  "reclaim_sol_from_token_accounts": "Reclaim SOL from token accounts instantly",
+  "instant_trading_for_your_token": "Trade instantly for your token",
+  "titlePrefix": "Launch Your",
+  "titleHighlight": "Meme Coin",
+  "titleSuffix": "on Solana",
+  "subtitle": "New millionaire on the way🚀",
+  "description": "Trade meme coin ❌, Create meme coin ✅ ",
+  "getStarted": "Get Started",
+
+  "faq": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "need_help": "Need Help?",
+    "still_have_questions": "Still have",
+    "still_have_questions_highlight": "Questions?",
+    "cant_find_answer": "Can't find the answer you're looking for? Our friendly customer support team is ready to help you.",
+    "contact_support_team": "Contact Support Team",
+    "we_will_respond_within_24_hours": "We'll respond within 24 hours",
+    "how_can_we_help_you": "How can we help you?",
+    "common_questions_you_might_have": "Common Questions You",
+    "common_questions_you_might_have_description": "Find quick answers to frequently asked questions about our platform.",
+    "faq_question": [
+      {
+        "question": "What can I do with my meme coin?",
+        "answer": "Your meme coin can be used in multiple ways: trade it on decentralized exchanges (DEX), hold it as an investment, send it to other wallets, provide liquidity to earn rewards, participate in community governance if enabled, or use it within specific platforms that accept your token."
+      },
+      {
+        "question": "Where is my meme token listed and how can I view it?",
+        "answer": "Your meme token is listed on the Solana blockchain and can be viewed through blockchain explorers like Solscan or Solana Explorer. Once created, you can also list it on decentralized exchanges like Raydium or Jupiter, and track its performance on platforms like DexScreener or Birdeye."
+      },
+      {
+        "question": "Can I send my meme tokens to other wallets?",
+        "answer": "Yes! You can easily send your meme tokens to any Solana-compatible wallet address. Simply use your wallet (like Phantom or Solflare), enter the recipient's wallet address, specify the amount of tokens you want to send, and confirm the transaction. A small SOL fee will be required for the transaction."
+      },
+      {
+        "question": "How do I swap my meme tokens for other cryptocurrencies?",
+        "answer": "You can swap your meme tokens using decentralized exchanges (DEX) on Solana such as Jupiter, Raydium, or Orca. Connect your wallet, select your meme token and the cryptocurrency you want to receive, enter the amount, review the exchange rate and fees, then confirm the swap. Ensure you have some SOL for transaction fees."
+      },
+      {
+        "question": "Can I transfer my tokens between different wallets and what are the requirements?",
+        "answer": "Yes, you can transfer your meme tokens between any Solana-compatible wallets. You'll need the recipient wallet address, sufficient tokens to transfer, and a small amount of SOL (typically 0.000005 SOL) to cover the network transaction fee. Transfers are typically completed within seconds on the Solana network."
+      }
+    ]
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close"
+  },
+  "nav": {
+    "home": "Home",
+    "explore": "Integration",
+    "testimonials": "Testimonials",
+    "faq": "FAQ"
+  },
+  "footer": {
+    "copyright": "© 2025 Crowdfunding Platform. All rights reserved.",
+    "quickLinks": "Quick Links",
+    "support": "Support",
+    "legal": "Legal",
+    "allRightsReserved": "All rights reserved."
+  },
+  "localeSwitcher": {
+    "placeholder": "Language",
+    "languages": [
+      {
+        "value": "en",
+        "label": "English"
+      },
+      {
+        "value": "vi",
+        "label": "Vietnamese"
+      }
+    ]
+  },
+  "hero": {
+    "titlePrefix": "Launch Your",
+    "titleHighlight": "Meme Coin",
+    "titleSuffix": "on Solana",
+    "subtitle": "New millionaire on the way to the moon 🚀",
+    "description": "Run after meme coin ❌, Create meme coin ✅ ",
+    "getStarted": "Get Started"
+  },
+  "integration": {
+    "title": "The Brands We Work With",
+    "description": "Building strong partnerships with the",
+    "description_highlight": "world's most influential companies.",
+    "description_suffix": "Collaborating with enterprises and startups alike to push boundaries, disrupt markets, and achieve groundbreaking results.",
+    "button": "Create Your Own Token Now"
+  },
+  "testimonials": {
+    "title": "What",
+    "title_highlight": "Creators",
+    "title_suffix": "Are Saying",
+    "description": "Real feedback from meme coin creators on X"
+  },
+  "not_found_page": {
+    "title": "Page Not Found",
+    "title_suffix": "The page you are looking for has been deleted or does not exist.",
+    "back_to_home": "Back to Home"
+  },
+  "layout": {
+    "title": "NhatCapDang",
+    "description": "Create Meme Coin for Free | NhatCapDang",
+    "template": "%s | NhatCapDang",
+    "default": "Create Meme Coin for Free | NhatCapDang",
+    "keywords": [
+      "create meme coin",
+      "how to create a meme coin for free",
+      "create meme coin pump fun",
+      "launch token solana",
+      "solana token creator",
+      "meme coin generator"
+    ],
+    "description_large_image": "Create a meme coin on Solana in minutes. No code. Free tools for token creation, burning, metadata updates, and more."
+  }
+}

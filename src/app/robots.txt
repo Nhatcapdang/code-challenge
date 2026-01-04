@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /private/
+Disallow: /*?*
+
+# Reduce crawl waste on non-HTML assets
+Disallow: /*.json$
+Disallow: /*.xml$
+
+# Point to sitemap
+Sitemap: https://nhatcapdang.com/sitemap.xml
