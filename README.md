@@ -50,8 +50,8 @@ A modern Next.js application showcasing token swap functionality, code examples,
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd nhatcapdang-1
+git clone https://github.com/Nhatcapdang/code-challenge
+cd code-challenge
 
 # Install dependencies
 yarn install
