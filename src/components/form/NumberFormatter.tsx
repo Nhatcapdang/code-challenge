@@ -1,8 +1,8 @@
-import { Control, Controller, FieldValues } from 'react-hook-form';
-import { FormBase } from '.';
-import { NumericFormat } from 'react-number-format';
-import { Input } from '../ui';
 import { ComponentProps, ReactNode } from 'react';
+import { Control, Controller, FieldValues } from 'react-hook-form';
+import { NumericFormat } from 'react-number-format';
+import { FormBase } from '.';
+import { Input } from '../ui';
 
 type NumberFormatterProps<T extends FieldValues> = FormControlProps<T> & {
   control: Control<T>;

@@ -16,6 +16,7 @@ import { useForm, useFormContext, useWatch } from 'react-hook-form';
 import NumberFormatter from './form/NumberFormatter';
 import { AvatarKit } from './kit/avatar';
 import {
+  Badge,
   Button,
   ButtonGroup,
   Card,
@@ -106,180 +107,6 @@ const confettiSideEffect = () => {
   };
   frame();
 };
-export function SwapComponent() {
-  const [
-    isSuccessDialogOpen,
-    { open: openSuccessDialog, close: closeSuccessDialog },
-  ] = useDisclosure(false);
-
-  const { setSwapForm, initialSwapForm } = useSwapStore(state => state);
-  const swapForm = useForm<SwapFormData>({
-    resolver: zodResolver(SwapFormSchema),
-    defaultValues: initialSwapForm,
-    mode: 'onSubmit',
-  });
-  const { mutate: swapMutation, isPending: isSwapping } = useSwapMutation();
-
-  const [payToken, receiveToken, payAmount, receiveAmount] = useWatch({
-    control: swapForm.control,
-    name: ['payToken', 'receiveToken', 'payAmount', 'receiveAmount'],
-  });
-
-  const handleSwap = useCallback(
-    (data: SwapFormData) => {
-      swapMutation(data, {
-        onSuccess: () => {
-          confettiSideEffect();
-          setSwapForm(data);
-          openSuccessDialog();
-          swapForm.reset();
-        },
-      });
-    },
-    [swapMutation, setSwapForm, openSuccessDialog, swapForm]
-  );
-
-  const handleInverseSwap = useCallback(() => {
-    swapForm.setValue('payToken', receiveToken);
-    swapForm.setValue('receiveToken', payToken);
-    swapForm.setValue('payAmount', receiveAmount);
-    swapForm.setValue('receiveAmount', payAmount);
-  }, [payToken, receiveToken, payAmount, receiveAmount, swapForm]);
-
-  return (
-    <section
-      id="problem2"
-      className=" p-5 min-h-screen grid place-items-center "
-    >
-      <Card className="w-full max-w-sm mx-auto mt-4 relative overflow-hidden ">
-        <h1 className="text-2xl font-bold text-center">Swap</h1>
-        <Form form={swapForm} onSubmit={swapForm.handleSubmit(handleSwap)}>
-          <CardContent className="space-y-6">
-            <div className="flex flex-col gap-2">
-              <SelectPayToken />
-              <NumberFormatter
-                control={swapForm.control}
-                name="payAmount"
-                label="Pay Token"
-                leftIcon={
-                  <AvatarKit
-                    image={payToken?.image || ''}
-                    name={payToken?.name || ''}
-                    symbol={payToken?.symbol || ''}
-                  />
-                }
-                decimalScale={3}
-                placeholder="0.00"
-                thousandSeparator=","
-                max={100_000_000_000}
-                allowNegative={false}
-                isAllowed={values => {
-                  const { floatValue } = values;
-                  return floatValue ? floatValue <= 100_000_000_000 : false;
-                }}
-                onValueChange={values => {
-                  swapForm.setValue('payAmount', values.floatValue || 0);
-                  const calculatedReceiveAmount =
-                    ((values.floatValue || 0) * (payToken?.price || 0)) /
-                    (receiveToken?.price || 0);
-                  swapForm.setValue('receiveAmount', calculatedReceiveAmount);
-                }}
-              />
-              <div className="m-auto mt-1">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={handleInverseSwap}
-                  type="button"
-                  effect="shineHover"
-                >
-                  <RefreshCw className="size-8" />
-                </Button>
-              </div>
-              <SelectReceiveToken />
-
-              <NumberFormatter
-                control={swapForm.control}
-                name="receiveAmount"
-                label="Receive Token"
-                leftIcon={
-                  <AvatarKit
-                    image={receiveToken?.image || ''}
-                    name={receiveToken?.name || ''}
-                    symbol={receiveToken?.symbol || ''}
-                  />
-                }
-                decimalScale={3}
-                placeholder="0.00"
-                thousandSeparator=","
-                readOnly
-              />
-            </div>
-            <div className="space-y-4">
-              <Alert>
-                <AlertTitle className="line-clamp-2">
-                  <span className="font-bold">Trade Slippage:</span> Set the
-                  allowed percentage difference between the quoted price and
-                  actual execution price of your trade.
-                </AlertTitle>
-
-                <AlertDescription>
-                  <Separator className="my-2 " />
-                  <ButtonGroup aria-label="Button group" className="w-full">
-                    {[0.1, 0.5, 1, 5].map((slippage, index) => (
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          'flex-1 duration-300 transition-all ease-in-out',
-                          swapForm.getValues('slippage') === slippage
-                            ? 'bg-primary text-primary-foreground'
-                            : 'bg-transparent text-foreground hover:bg-primary/10 hover:text-primary'
-                        )}
-                        type="button"
-                        key={index}
-                        onClick={() => {
-                          swapForm.setValue('slippage', slippage);
-                          swapForm.trigger('slippage');
-                        }}
-                      >
-                        {slippage}%
-                      </Button>
-                    ))}
-                  </ButtonGroup>
-                </AlertDescription>
-              </Alert>
-            </div>
-          </CardContent>
-          <CardFooter className="flex justify-end mt-4">
-            <Button
-              effect="shineHover"
-              className="w-full"
-              disabled={
-                !swapForm.formState.isValid ||
-                isSwapping ||
-                payToken?.name === receiveToken?.name ||
-                payAmount <= 0 ||
-                receiveAmount <= 0
-              }
-            >
-              {isSwapping ? (
-                <Spinner className="h-4 w-4 mr-2" />
-              ) : (
-                <RefreshCw className="h-4 w-4 mr-2" />
-              )}
-              Swap
-            </Button>
-          </CardFooter>
-        </Form>
-      </Card>
-
-      <SwapSuccessDialog
-        open={isSuccessDialogOpen}
-        onOpenChange={closeSuccessDialog}
-      />
-    </section>
-  );
-}
 
 const SelectPayToken = () => {
   const swapForm = useFormContext<SwapFormData>();
@@ -361,6 +188,11 @@ const SelectReceiveToken = () => {
   const handleReceiveTokenSelect = useCallback(
     (token: ComboboxItem<UseTokensResponse[number]>) => {
       swapForm.setValue('receiveToken', token);
+      const payAmount = swapForm.getValues('payAmount');
+      const payToken = swapForm.getValues('payToken');
+      const calculatedReceiveAmount =
+        (payAmount * (payToken?.price || 0)) / (token.price || 0);
+      swapForm.setValue('receiveAmount', calculatedReceiveAmount);
     },
     [swapForm]
   );
@@ -526,3 +358,201 @@ const SwapSuccessDialog = ({
     </Dialog>
   );
 };
+
+export function SwapComponent() {
+  const [
+    isSuccessDialogOpen,
+    { open: openSuccessDialog, close: closeSuccessDialog },
+  ] = useDisclosure(false);
+
+  const { setSwapForm, initialSwapForm } = useSwapStore(state => state);
+  const swapForm = useForm<SwapFormData>({
+    resolver: zodResolver(SwapFormSchema),
+    defaultValues: initialSwapForm,
+    mode: 'onSubmit',
+  });
+  const { mutate: swapMutation, isPending: isSwapping } = useSwapMutation();
+
+  const [payToken, receiveToken, payAmount, receiveAmount] = useWatch({
+    control: swapForm.control,
+    name: ['payToken', 'receiveToken', 'payAmount', 'receiveAmount'],
+  });
+
+  const handleSwap = useCallback(
+    (data: SwapFormData) => {
+      swapMutation(data, {
+        onSuccess: () => {
+          confettiSideEffect();
+          setSwapForm(data);
+          openSuccessDialog();
+          swapForm.reset();
+        },
+      });
+    },
+    [swapMutation, setSwapForm, openSuccessDialog, swapForm]
+  );
+
+  const handleInverseSwap = useCallback(() => {
+    swapForm.setValue('payToken', receiveToken);
+    swapForm.setValue('receiveToken', payToken);
+    swapForm.setValue('payAmount', receiveAmount);
+    swapForm.setValue('receiveAmount', payAmount);
+  }, [payToken, receiveToken, payAmount, receiveAmount, swapForm]);
+
+  return (
+    <section
+      id="problem2"
+      className=" p-5 min-h-screen grid place-items-center "
+    >
+      <Card className="w-full max-w-sm mx-auto mt-4 relative overflow-hidden ">
+        <h1 className="text-2xl font-bold text-center">Swap</h1>
+        <Form form={swapForm} onSubmit={swapForm.handleSubmit(handleSwap)}>
+          <CardContent className="space-y-6">
+            <div className="flex flex-col gap-2">
+              <SelectPayToken />
+              <NumberFormatter
+                control={swapForm.control}
+                name="payAmount"
+                label="Pay Token"
+                description="Available Balance: 100,000,000,000"
+                leftIcon={
+                  <AvatarKit
+                    image={payToken?.image || ''}
+                    name={payToken?.name || ''}
+                    symbol={payToken?.symbol || ''}
+                  />
+                }
+                decimalScale={3}
+                placeholder="0.00"
+                thousandSeparator=","
+                max={100_000_000_000}
+                allowNegative={false}
+                isAllowed={values => {
+                  const { floatValue } = values;
+                  return floatValue ? floatValue <= 100_000_000_000 : false;
+                }}
+                onValueChange={values => {
+                  swapForm.setValue('payAmount', values.floatValue || 0);
+                  const calculatedReceiveAmount =
+                    ((values.floatValue || 0) * (payToken?.price || 0)) /
+                    (receiveToken?.price || 0);
+                  swapForm.setValue('receiveAmount', calculatedReceiveAmount);
+                }}
+                rightIcon={
+                  <span className="flex items-center gap-2">
+                    <Badge
+                      variant="outline"
+                      onClick={() => {
+                        swapForm.setValue('payAmount', 50_000_000_000);
+                      }}
+                    >
+                      Half
+                    </Badge>
+                    <Badge
+                      variant="outline"
+                      onClick={() => {
+                        swapForm.setValue('payAmount', 100_000_000_000);
+                      }}
+                    >
+                      Max
+                    </Badge>
+                  </span>
+                }
+              />
+              <div className="m-auto mt-1">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={handleInverseSwap}
+                  type="button"
+                  effect="shineHover"
+                >
+                  <RefreshCw className="size-8" />
+                </Button>
+              </div>
+              <SelectReceiveToken />
+
+              <NumberFormatter
+                control={swapForm.control}
+                name="receiveAmount"
+                label="Receive Token"
+                leftIcon={
+                  <AvatarKit
+                    image={receiveToken?.image || ''}
+                    name={receiveToken?.name || ''}
+                    symbol={receiveToken?.symbol || ''}
+                  />
+                }
+                decimalScale={3}
+                placeholder="0.00"
+                thousandSeparator=","
+                readOnly
+              />
+            </div>
+            <div className="space-y-4">
+              <Alert>
+                <AlertTitle className="line-clamp-2">
+                  <span className="font-bold">Trade Slippage:</span> Set the
+                  allowed percentage difference between the quoted price and
+                  actual execution price of your trade.
+                </AlertTitle>
+
+                <AlertDescription>
+                  <Separator className="my-2 " />
+                  <ButtonGroup aria-label="Button group" className="w-full">
+                    {[0.1, 0.5, 1, 5].map((slippage, index) => (
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          'flex-1 duration-300 transition-all ease-in-out',
+                          swapForm.getValues('slippage') === slippage
+                            ? 'bg-primary text-primary-foreground'
+                            : 'bg-transparent text-foreground hover:bg-primary/10 hover:text-primary'
+                        )}
+                        type="button"
+                        key={index}
+                        onClick={() => {
+                          swapForm.setValue('slippage', slippage);
+                          swapForm.trigger('slippage');
+                        }}
+                      >
+                        {slippage}%
+                      </Button>
+                    ))}
+                  </ButtonGroup>
+                </AlertDescription>
+              </Alert>
+            </div>
+          </CardContent>
+          <CardFooter className="flex justify-end mt-4">
+            <Button
+              effect="shineHover"
+              className="w-full"
+              disabled={
+                !swapForm.formState.isValid ||
+                isSwapping ||
+                payToken?.name === receiveToken?.name ||
+                payAmount <= 0 ||
+                receiveAmount <= 0
+              }
+            >
+              {isSwapping ? (
+                <Spinner className="h-4 w-4 mr-2" />
+              ) : (
+                <RefreshCw className="h-4 w-4 mr-2" />
+              )}
+              Swap
+            </Button>
+          </CardFooter>
+        </Form>
+      </Card>
+
+      <SwapSuccessDialog
+        open={isSuccessDialogOpen}
+        onOpenChange={closeSuccessDialog}
+      />
+    </section>
+  );
+}
+
+SwapComponent.displayName = 'SwapComponent';
